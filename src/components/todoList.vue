@@ -10,8 +10,8 @@
       <ul class="taskList">
         <li v-for="(item,index) in initTodoList" :key="index">
          {{index+1}}.
-          <p><input type="checkbox">
-          <span>{{item.text}}</span>
+          <p><input type="checkbox" :checked="item.check" @change="checkBoxChange(index)">
+          <span :class="{cboxActive:item.check}">{{item.text}}</span>
           </p>
         </li>
       </ul>
@@ -35,7 +35,8 @@ export default {
         {id:2,check:false,text:789}
         ],
         activeKind:'All',
-        inputItem:''
+        inputItem:'',
+        cboxActive:false
     }
   },
  computed: {
@@ -53,12 +54,15 @@ export default {
   methods:{
     addItem(){
       const item ={
-        id:this.toDoList.length+1,
+        id:this.toDoList.length,
         check:false,
         text:this.inputItem
       }
       this.toDoList.push(item);
       this.inputItem=''
+    },
+    checkBoxChange(index){
+      this.toDoList[index].check = !this.toDoList[index].check
     }
   }
 }
@@ -121,6 +125,9 @@ input[type='checkbox']{
   margin-right: 5px;
   width: 16px;
   height: 16px;
+}
+.cboxActive{
+  text-decoration: line-through;
 }
 .taskList li:nth-child(even) p:first-child{
   background-color: #ffe9e9;
