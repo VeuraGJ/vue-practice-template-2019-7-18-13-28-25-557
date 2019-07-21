@@ -2,9 +2,9 @@
   <div class="todoDiv">
     <h1>Jquery To Do List</h1>
     <p>Simple Todo List with adding and filter by diff status</p>
-    <form>
-      <input type="text">
-      <button>Add</button>
+    <form action="">
+      <input type="text" v-model="inputItem">
+      <button type="button" @click="addItem">Add</button>
     </form>
     <div>
       <ul class="taskList">
@@ -34,7 +34,8 @@ export default {
         {id:1,check:false,text:456},
         {id:2,check:false,text:789}
         ],
-        activeKind:'All'
+        activeKind:'All',
+        inputItem:''
     }
   },
  computed: {
@@ -49,6 +50,17 @@ export default {
       }
     },
   },
+  methods:{
+    addItem(){
+      const item ={
+        id:this.toDoList.length+1,
+        check:false,
+        text:this.inputItem
+      }
+      this.toDoList.push(item);
+      this.inputItem=''
+    }
+  }
 }
 </script>
 
