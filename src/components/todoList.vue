@@ -11,7 +11,12 @@
         <li v-for="(item,index) in initTodoList" :key="index">
          {{index+1}}.
           <p><input type="checkbox" :checked="item.check" @change="checkBoxChange(index)">
-          <span :class="{cboxActive:item.check}">{{item.text}}</span>
+          <span :class="{cboxActive:item.check}"  @dblclick="modifyItem(index)"
+          v-if="!item.inputShow">{{item.text}}</span>
+         <input type="text" v-else
+                 class="newInput"
+                 @keyup.enter="enterClick(index)"
+                 v-model="newInput">
           </p>
         </li>
       </ul>
@@ -30,13 +35,14 @@ export default {
   data(){
     return {
       toDoList:[
-        {id:0,check:false,text:123},
-        {id:1,check:false,text:456},
-        {id:2,check:false,text:789}
+        {check:false,text:123,inputShow:false},
+        {check:false,text:456,inputShow:false},
+        {check:false,text:789,inputShow:false}
         ],
         activeKind:'All',
         inputItem:'',
-        cboxActive:false
+        cboxActive:false,
+        newInput:''
     }
   },
  computed: {
@@ -54,15 +60,23 @@ export default {
   methods:{
     addItem(){
       const item ={
-        id:this.toDoList.length,
         check:false,
-        text:this.inputItem
+        text:this.inputItem,
+        inputShow:false
       }
       this.toDoList.push(item);
       this.inputItem=''
     },
     checkBoxChange(index){
       this.toDoList[index].check = !this.toDoList[index].check
+    },
+    modifyItem(index){
+      this.newInput= this.toDoList[index].text;
+      this.toDoList[index].inputShow=true;
+    },
+    enterClick (index) {
+      this.toDoList[index].text = this.newInput;
+      this.toDoList[index].inputShow = false;
     }
   }
 }
@@ -85,7 +99,7 @@ export default {
   text-align: left;
   padding: 10px 30px;
 }
-input[type='text']{
+.todoDiv form >input[type='text']{
     width: 70%;
     height: 30px;
     margin-right: 5px;
