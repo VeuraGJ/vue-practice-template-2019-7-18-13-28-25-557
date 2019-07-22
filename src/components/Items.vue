@@ -27,12 +27,12 @@ export default {
   computed:{
      todoList(){
        switch(this.$store.state.activeKind){
-        case 'All':
-           return this.$store.state.todoList;
         case 'Active':
            return this.$store.state.todoList.filter(item => !item.check);
         case 'Complete':
            return this.$store.state.todoList.filter(item => item.check);
+        default:
+           return this.$store.state.todoList;
        }
       }
   },
