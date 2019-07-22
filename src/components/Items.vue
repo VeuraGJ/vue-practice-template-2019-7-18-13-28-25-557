@@ -1,7 +1,7 @@
 <template>
   <div class="Items">
     <ul class="taskList">
-        <li v-for="(item,index) in todoList" :key="index">
+        <li v-for="(item,index) in todoList" :key="item.id">
            {{index+1}}.
           <p><input type="checkbox" :checked="item.check" @change="checkBoxChange(item.id)">
           <span :class="{cboxActive:item.check}"  @dblclick="modifyItem(index)"
