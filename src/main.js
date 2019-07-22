@@ -12,15 +12,17 @@ Vue.config.productionTip = false
 const store = new Vuex.Store({
   state:{
     todoList:[
-      {check:false,text:123,inputShow:false},
-      {check:false,text:456,inputShow:false},
-      {check:false,text:789,inputShow:false}
+      {id:0,check:false,text:123,inputShow:false},
+      {id:1,check:false,text:456,inputShow:false},
+      {id:2,check:false,text:789,inputShow:false}
       ],
     activeKind: 'All' 
   },
   mutations:{
     [ADD_ITEM](state,text){
+      const length =state.todoList.length;
       const item ={
+        id:length,
         check:false,
         text: text,
         inputShow:false

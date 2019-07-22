@@ -3,7 +3,7 @@
     <ul class="taskList">
         <li v-for="(item,index) in todoList" :key="index">
            {{index+1}}.
-          <p><input type="checkbox" :checked="item.check" @change="checkBoxChange(index)">
+          <p><input type="checkbox" :checked="item.check" @change="checkBoxChange(item.id)">
           <span :class="{cboxActive:item.check}"  @dblclick="modifyItem(index)"
           v-if="!item.inputShow">{{item.text}}</span>
          <input type="text" v-else
