@@ -1,6 +1,7 @@
 <template>
   <ul class="taskList">
-    <todoItem v-for="item in todoItems" :key="item.id" :item="item"></todoItem>
+    <todoItem v-for="(item,index) in todoItems" :key="item.id" :item="item" :index="index">
+    </todoItem>
   </ul>
 </template>
 
@@ -13,16 +14,9 @@ export default {
   },
   computed:{
     todoItems(){
-      switch(this.$store.state.activeKind){
-        case 'Active':
-           return this.$store.state.todoList.filter(item => !item.check);
-        case 'Complete':
-           return this.$store.state.todoList.filter(item => item.check);
-        default:
-           return this.$store.state.todoList;
+     return this.$store.getters.switchItems(this.$store.state.activeKind);
     }
   }
-}
 }
 </script>
 

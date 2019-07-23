@@ -2,12 +2,13 @@
   <div class="addTodo">
     <form action="">
       <input type="text" v-model="inputItem">
-      <button type="button" @click="addItem">Add</button>
+      <button type="button" @click="addTodoItem">Add</button>
     </form>
   </div>
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 export default {
   name: 'addTodo',
   data(){
@@ -16,8 +17,9 @@ export default {
       }
   },
   methods:{
-    addItem(){
-      this.$store.commit('ADD_ITEM',this.inputItem);
+    ...mapMutations(['addItem']),
+    addTodoItem(){
+      this.addItem(this.inputItem);
       this.inputItem ='';
     }
   }

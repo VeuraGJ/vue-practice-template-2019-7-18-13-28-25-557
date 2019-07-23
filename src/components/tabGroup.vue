@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 export default {
   name: 'listKind',
   data(){
@@ -16,9 +17,10 @@ export default {
     tabs:Array
   },
  methods:{
+   ...mapMutations(['filterItem']),
     switchTab(tab){
       this.currentTab = tab;
-      this.$store.commit('FILTER_ITEM',this.currentTab)
+      this.filterItem(this.currentTab);
     }
   }
 }

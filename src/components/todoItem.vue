@@ -1,23 +1,25 @@
 <template>
   <div class="todoItem">
         <li>
-           {{item.id}}.
-          <input type="checkbox" :checked="item.check" @change="checkBoxChange(item.id)">
-          <span :class="{cboxActive:item.check}"  @dblclick="modifyItem()"
-          v-if="!ediable">{{item.text}}</span>
+          {{index+1}}.
+          <input type="checkbox" :checked="item.complete" @change="checkBoxChange(item)">
+          <span :class="{cboxActive:item.complete}"  @dblclick="modifyItem()"
+          v-if="!ediable">{{item.content}}</span>
          <input type="text" v-else
                  class="newInput"
-                 @keyup.enter="enterClick(item.id)"
+                 @keyup.enter="enterClick(item)"
                  v-model="content">
         </li>
   </div>
 </template>
 
 <script>
+import {mapMutations} from 'vuex'
 export default {
   name: 'todoItem',
   props:{
-    item:Object
+    item:Object,
+    index:Number
   },
   data(){
     return {
@@ -26,15 +28,20 @@ export default {
     }
   },
   methods:{
-     checkBoxChange(index){
-      this.$store.commit('CHANGE_ITEM_CHECK',index)
+    ...mapMutations(['changeItem']),
+     checkBoxChange(item){
+       item.complete = !item.complete
+       let updateItem ={id:item.id,content:item.content,complete:item.complete}
+       this.changeItem(updateItem);
     },
     modifyItem(){
       this.ediable = true;
-      this.content = this.item.text;
+      this.content = this.item.content;
     },
-    enterClick(index){
-      this.$store.commit('ENTER_CLICK',{id:index,content:this.content})
+    enterClick(item){
+      item.content = this.content;
+      let updateItem ={id:item.id,content:item.content,complete:item.complete}
+       this.changeItem(updateItem);
       this.ediable = false;
     }
   }
@@ -43,5 +50,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+ .cboxActive{
+    text-decoration: line-through;
+  }
   @import "../assets/style.css";
 </style>
