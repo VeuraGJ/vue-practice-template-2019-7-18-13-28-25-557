@@ -12,7 +12,6 @@ import todoTitle from './components/todoTitle.vue'
 import addTodo from './components/addTodo.vue'
 import todoList from './components/todoList.vue'
 import tabGroup from './components/tabGroup.vue'
-
 export default {
   name: 'app',
   data(){
@@ -27,6 +26,10 @@ export default {
     addTodo,
     todoList,
     tabGroup
+  },
+  mounted:function(){
+    this.$store.dispatch('getTodoList');
+
   }
 }
 </script>

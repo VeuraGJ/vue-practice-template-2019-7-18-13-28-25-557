@@ -19,7 +19,8 @@ export default {
   methods:{
     ...mapMutations(['addItem']),
     addTodoItem(){
-      this.addItem(this.inputItem);
+      this.$store.dispatch('addTodoList',{content:this.inputItem,complete:false})
+      // this.addItem(this.inputItem);
       this.inputItem ='';
     }
   }
