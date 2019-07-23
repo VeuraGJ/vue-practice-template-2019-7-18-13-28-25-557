@@ -1,26 +1,28 @@
 <template>
-  <div class="todoDiv">
-    <h1>Jquery To Do List</h1>
-    <p>Simple Todo List with adding and filter by diff status</p>
-    <addItem></addItem>
-    <div>
-      <Items></Items>
-    </div>
-    <filterItem></filterItem>
-  </div>
+  <ul class="taskList">
+    <todoItem v-for="item in todoItems" :key="item.id" :item="item"></todoItem>
+  </ul>
 </template>
 
 <script>
-import Items from './Items.vue'
-import addItem from './addItem.vue'
-import filterItem from './filterItem.vue'
+import todoItem from './todoItem.vue'
 export default {
-  name: 'HelloWorld',
+  name: 'todoList',
   components:{
-    Items,
-    addItem,
-    filterItem
+    todoItem
+  },
+  computed:{
+    todoItems(){
+      switch(this.$store.state.activeKind){
+        case 'Active':
+           return this.$store.state.todoList.filter(item => !item.check);
+        case 'Complete':
+           return this.$store.state.todoList.filter(item => item.check);
+        default:
+           return this.$store.state.todoList;
+    }
   }
+}
 }
 </script>
 

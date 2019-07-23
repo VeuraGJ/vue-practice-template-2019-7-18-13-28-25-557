@@ -1,5 +1,5 @@
 <template>
-  <div class="addItem">
+  <div class="addTodo">
     <form action="">
       <input type="text" v-model="inputItem">
       <button type="button" @click="addItem">Add</button>
@@ -8,9 +8,8 @@
 </template>
 
 <script>
-import Items from './Items.vue'
 export default {
-  name: 'HelloWorld',
+  name: 'addTodo',
   data(){
       return{
            inputItem:'',

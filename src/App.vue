@@ -1,16 +1,32 @@
 <template>
   <div id="app">
+    <todoTitle :title="title" :subTitle="subTitle"></todoTitle>
+    <addTodo></addTodo>
     <todoList/>
+    <tabGroup :tabs="tabs"></tabGroup>
   </div>
 </template>
 
 <script>
+import todoTitle from './components/todoTitle.vue'
+import addTodo from './components/addTodo.vue'
 import todoList from './components/todoList.vue'
+import tabGroup from './components/tabGroup.vue'
 
 export default {
   name: 'app',
+  data(){
+    return{
+      title:'Jquery To Do List',
+      subTitle:'Simple Todo List with adding and filter by diff status',
+      tabs:['All','Active','Complete']
+    }
+  },
   components: {
-    todoList
+    todoTitle,
+    addTodo,
+    todoList,
+    tabGroup
   }
 }
 </script>

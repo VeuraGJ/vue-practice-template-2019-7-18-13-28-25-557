@@ -33,7 +33,8 @@
   }
   .listKind{
     cursor: pointer;
-    margin-left:150px;
+    width:250px;
+    margin: 0 auto;
   }
   .taskList li{
     height: 35px;

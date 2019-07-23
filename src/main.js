@@ -38,8 +38,8 @@ const store = new Vuex.Store({
       }
     },
     ENTER_CLICK(state,updateItem){
-      state.todoList.filter(item => item.inputShow)[0].text = updateItem;
-      state.todoList.filter(item => item.inputShow)[0].inputShow = !state.todoList.filter(item => item.inputShow)[0].inputShow ;
+      console.log(updateItem);
+      state.todoList.filter(item => item.id === updateItem.id)[0].text = updateItem.content;
     },
     FILTER_ITEM(state,activeKind){
       state.activeKind = activeKind;
